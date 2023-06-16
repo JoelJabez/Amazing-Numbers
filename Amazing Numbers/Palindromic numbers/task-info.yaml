@@ -382,6 +382,12 @@ files:
         }
     }
   learner_created: false
+- name: src/numbers/AmazingNumbers.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13200#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 16 Jun 2023 07:26:57 UTC"
 record: -1
