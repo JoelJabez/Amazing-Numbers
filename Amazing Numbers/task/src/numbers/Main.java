@@ -25,26 +25,27 @@ public class Main {
         System.out.println("Properties of " + number);
 
         System.out.println("\teven: " + isEven(number));
-        System.out.println("\todd: " + !isEven(number));
-        System.out.println("\tbuzz: " + buzzNumbers(number));
-        System.out.println("\tduck: " + duckNumbers(number));
+        System.out.println("\todd: " + isOdd(number));
+        System.out.println("\tbuzz: " + isBuzzNumber(number));
+        System.out.println("\tduck: " + isDuckNumber(number));
     }
 
     private static boolean isEven(int number) {
         return number % 2 == 0;
     }
 
-    private static boolean buzzNumbers(int number) {
-        String stringNumber = Integer.toString(number);
-        int length = stringNumber.length();
-        char lastNumber = stringNumber.charAt(length - 1);
+	private static boolean isOdd(int number) {
+		return number % 2 == 1;
+	}
 
-        if (number % 7 == 0) {
+	private static boolean isBuzzNumber(int number) {
+        if (number % 7 == 0 || number % 10 == 7) {
             return true;
-        } else return lastNumber == '7';
+        }
+		return false;
     }
 
-    private static boolean duckNumbers(int number) {
+    private static boolean isDuckNumber(int number) {
         String stringNumber = String.valueOf(number);
         return stringNumber.contains("0");
     }
