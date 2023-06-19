@@ -8,16 +8,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter a natural number:");
-        int number;
         try {
-            number = scanner.nextInt();
-            buzzNumbers(number);
+            int number = scanner.nextInt();
+            buzzChecker(number);
         } catch (InputMismatchException ime) {
             System.out.println("This number is not natural!");
         }
     }
 
-    private static void isEven(int number) {
+    private static void evenChecker(int number) {
         if (number % 2 == 0) {
             System.out.println("This number is Even.");
         } else {
@@ -25,22 +24,18 @@ public class Main {
         }
     }
 
-    private static void buzzNumbers(Integer number) {
+    private static void buzzChecker(Integer number) {
         if (number < 1) {
             System.out.println("This number is not natural!");
         } else {
-            isEven(number);
-
-            String stringNumber = number.toString();
-            int length = stringNumber.length();
-            char lastNumber = stringNumber.charAt(length - 1);
+            evenChecker(number);
 
             int counter = 0;
             if (number % 7 == 0) {
                 counter+=2;
             }
 
-            if (lastNumber == '7') {
+            if (number % 10 == 7) {
                 counter++;
             }
 
@@ -51,11 +46,11 @@ public class Main {
             }
 
             System.out.println("Explanation:");
-            String explanation = switch (counter) {
-                case 3: yield number + " is divisible by 7 and ends with 7.";
-                case 2: yield number + " is divisible by 7.";
-                case 1: yield number + " ends with 7.";
-                default: yield number + " is neither divisible by 7 nor does it end with 7.";
+            String explanation = number + switch(counter) {
+                case 3: yield " is divisible by 7 and ends with 7.";
+                case 2: yield " is divisible by 7.";
+                case 1: yield " ends with 7.";
+                default: yield " is neither divisible by 7 nor does it end with 7.";
             };
 
             System.out.println(explanation);
