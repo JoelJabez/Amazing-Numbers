@@ -132,8 +132,7 @@ public class AmazingNumbers {
 	}
 
 	private static boolean isDuckNumber() {
-		String stringNumber = String.valueOf(number);
-		return stringNumber.contains("0");
+		return String.valueOf(number).contains("0");
 	}
 
 	private static boolean isPalindromicNumber() {
