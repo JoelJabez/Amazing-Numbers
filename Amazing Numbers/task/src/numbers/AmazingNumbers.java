@@ -1,30 +1,38 @@
 package numbers;
 
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class AmazingNumbers {
 	private static long number;
-	private static boolean isEven;
-	private static boolean isOdd;
 	private static boolean isBuzzNumber;
 	private static boolean isDuckNumber;
 	private static boolean isPalindromicNumber;
+	private static boolean isGapfulNumber;
+	private static boolean isEven;
+	private static boolean isOdd;
 
 	public static void start() {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Welcome to Amazing Numbers!\n");
-
-		System.out.println("Supported requests:");
-		System.out.println("- enter a natural number to know its properties;");
-		System.out.println("- enter 0 to exit");
-
+		printRequests();
 		boolean isDone = false;
 		while (!isDone) {
 			System.out.println("\nEnter a request:");
 			try {
-				number = Long.parseLong(scanner.nextLine());
+				String text = scanner.nextLine();
+				if (Objects.equals(text, "")) {
+					printRequests();
+				} else {
+					number = Long.parseLong(text.split(" ")[0]);
+					int times = Integer.parseInt(text.split(" ")[1]);
+					if (times >= 2) {
+						printPropertiesRange(times);
+					} else {
+						System.out.println("The second parameter should be a natural number");
+					}
+				}
+			} catch (ArrayIndexOutOfBoundsException aioobe) {
 				if (number >= 1) {
 					callProperties();
 					printProperties();
@@ -40,23 +48,72 @@ public class AmazingNumbers {
 		System.out.println("\nGoodbye!");
 	}
 
+	private static void printRequests() {
+		System.out.println("Supported requests:");
+		System.out.println("- enter a natural number to know its properties;");
+		System.out.println("- enter two natural numbers to obtain the properties of the list:");
+		System.out.println("  * the first parameter represents a starting number;");
+		System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
+		System.out.println("- separate the parameters with one space;");
+		System.out.println("- enter 0 to exit.");
+	}
 
 	private static void callProperties() {
-		isEven = isEven();
-		isOdd = isOdd();
 		isBuzzNumber = isBuzzNumber();
 		isDuckNumber = isDuckNumber();
 		isPalindromicNumber = isPalindromicNumber();
+		isGapfulNumber = isGapfulNumber();
+		isEven = isEven();
+		isOdd = isOdd();
+	}
+
+	private static HashMap<String, Boolean> assignProperties() {
+		callProperties();
+
+		HashMap<String, Boolean> properties = new HashMap<>();
+		properties.put("buzz", isBuzzNumber);
+		properties.put("duck", isDuckNumber);
+		properties.put("palindromic", isPalindromicNumber);
+		properties.put("gapful", isGapfulNumber);
+		properties.put("even", isEven);
+		properties.put("odd", isOdd);
+
+		return properties;
+	}
+
+	private static void printPropertiesRange(int times) {
+		ArrayList<String> propertyList = new ArrayList<>(Arrays.asList("buzz", "duck", "palindromic", "gapful", "even",
+				"odd"));
+		long max = number + times;
+		System.out.println();
+		for (long i = number; i < max; i++) {
+			System.out.printf("%d is ", i);
+			number = i;
+			HashMap<String, Boolean> properties = assignProperties();
+			int counter = 0;
+			for (String s : propertyList) {
+				if (properties.get(s)) {
+					if (counter >= 1) {
+						System.out.printf(", %s", s);
+					} else {
+						System.out.print(s);
+					}
+					counter++;
+				}
+			}
+			System.out.println();
+		}
 	}
 
 	private static void printProperties() {
 		System.out.printf("Properties of %,d\n", number);
 
-		System.out.println("\t   even: " + isEven);
-		System.out.println("\t    odd: " + isOdd);
 		System.out.println("\t   buzz: " + isBuzzNumber);
 		System.out.println("\t   duck: " + isDuckNumber);
 		System.out.println("palindromic: " + isPalindromicNumber);
+		System.out.println("\t gapful: " + isGapfulNumber);
+		System.out.println("\t   even: " + isEven);
+		System.out.println("\t    odd: " + isOdd);
 	}
 
 	private static boolean isEven() {
@@ -89,5 +146,20 @@ public class AmazingNumbers {
 			}
 		}
 		return true;
+	}
+
+	private static boolean isGapfulNumber() {
+		int size = (int) Math.log10(number);
+
+		if (size > 1) {
+			int firstNumber = (int) (number / Math.pow(10, size));
+			int lastNumber = (int) (number % 10);
+
+			int sum = (firstNumber * 10) + lastNumber;
+
+			return number % sum == 0;
+		}
+
+		return false;
 	}
 }

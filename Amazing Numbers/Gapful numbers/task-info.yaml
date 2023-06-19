@@ -639,5 +639,8 @@ files:
     \t\t\treturn false;\n\t\t\t}\n\t\t}\n\t\treturn true;\n\t}\n}\n"
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13201#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Mon, 19 Jun 2023 06:34:33 UTC"
 record: 4
