@@ -26,8 +26,8 @@ public class AmazingNumbers {
 				} else {
 					number = Long.parseLong(text.split(" ")[0]);
 					int times = Integer.parseInt(text.split(" ")[1]);
-					if (times >= 2) {
-						printPropertiesRange(times);
+					if (times >= 1) {
+						printProperties(times);
 					} else {
 						System.out.println("The second parameter should be a natural number");
 					}
@@ -81,22 +81,22 @@ public class AmazingNumbers {
 		return properties;
 	}
 
-	private static void printPropertiesRange(int times) {
-		ArrayList<String> propertyList = new ArrayList<>(Arrays.asList("buzz", "duck", "palindromic", "gapful", "even",
-				"odd"));
-		long max = number + times;
+	private static void printProperties(int times) {
+		ArrayList<String> propertyList = new ArrayList<>(Arrays.asList("buzz", "duck", "palindromic", "gapful", "even", "odd"));
 		System.out.println();
+
+		long max = number + times;
 		for (long i = number; i < max; i++) {
 			System.out.printf("%d is ", i);
 			number = i;
 			HashMap<String, Boolean> properties = assignProperties();
 			int counter = 0;
-			for (String s : propertyList) {
+			for (String s: propertyList) {
 				if (properties.get(s)) {
-					if (counter >= 1) {
-						System.out.printf(", %s", s);
-					} else {
+					if (counter == 0) {
 						System.out.print(s);
+					} else {
+						System.out.printf(", %s", s);
 					}
 					counter++;
 				}
