@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="NumbersTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-19T01:59:13" hostname="0134" time="0.186">
+<testsuite name="NumbersTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-06-19T02:27:00" hostname="0134" time="0.183">
   <properties/>
-  <testcase name="start" classname="NumbersTest" time="0.186"/>
+  <testcase name="start" classname="NumbersTest" time="0.183"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 Enter a natural number:
@@ -136,8 +136,8 @@ Properties of 14
 ?[1;31m
 Start test 16?[0m
 Enter a natural number:
-> 6824
-Properties of 6824
+> 29796
+Properties of 29796
 	even: true
 	odd: false
 	buzz: false
@@ -145,173 +145,173 @@ Properties of 6824
 ?[1;31m
 Start test 17?[0m
 Enter a natural number:
-> 21103
-Properties of 21103
-	even: false
-	odd: true
-	buzz: false
-	duck: true
-?[1;31m
-Start test 18?[0m
-Enter a natural number:
-> 17689
-Properties of 17689
+> 32437
+Properties of 32437
 	even: false
 	odd: true
 	buzz: true
 	duck: false
 ?[1;31m
-Start test 19?[0m
+Start test 18?[0m
 Enter a natural number:
-> 31596
-Properties of 31596
+> 12990
+Properties of 12990
 	even: true
 	odd: false
+	buzz: false
+	duck: true
+?[1;31m
+Start test 19?[0m
+Enter a natural number:
+> 8375
+Properties of 8375
+	even: false
+	odd: true
 	buzz: false
 	duck: false
 ?[1;31m
 Start test 20?[0m
 Enter a natural number:
-> 28529
-Properties of 28529
-	even: false
-	odd: true
+> 19812
+Properties of 19812
+	even: true
+	odd: false
 	buzz: false
 	duck: false
 ?[1;31m
 Start test 21?[0m
 Enter a natural number:
-> 26400
-Properties of 26400
-	even: true
-	odd: false
-	buzz: false
-	duck: true
-?[1;31m
-Start test 22?[0m
-Enter a natural number:
-> 24685
-Properties of 24685
+> 28321
+Properties of 28321
 	even: false
 	odd: true
 	buzz: false
 	duck: false
 ?[1;31m
-Start test 23?[0m
+Start test 22?[0m
 Enter a natural number:
-> 31880
-Properties of 31880
+> 23940
+Properties of 23940
 	even: true
 	odd: false
-	buzz: false
+	buzz: true
+	duck: true
+?[1;31m
+Start test 23?[0m
+Enter a natural number:
+> 30257
+Properties of 30257
+	even: false
+	odd: true
+	buzz: true
 	duck: true
 ?[1;31m
 Start test 24?[0m
 Enter a natural number:
-> 454
-Properties of 454
+> 2860
+Properties of 2860
+	even: true
+	odd: false
+	buzz: false
+	duck: true
+?[1;31m
+Start test 25?[0m
+Enter a natural number:
+> 21754
+Properties of 21754
 	even: true
 	odd: false
 	buzz: false
 	duck: false
 ?[1;31m
-Start test 25?[0m
-Enter a natural number:
-> 14130
-Properties of 14130
-	even: true
-	odd: false
-	buzz: false
-	duck: true
-?[1;31m
 Start test 26?[0m
 Enter a natural number:
-> 23690
-Properties of 23690
+> 29636
+Properties of 29636
 	even: true
 	odd: false
 	buzz: false
-	duck: true
+	duck: false
 ?[1;31m
 Start test 27?[0m
 Enter a natural number:
-> 32685
-Properties of 32685
-	even: false
-	odd: true
+> 17412
+Properties of 17412
+	even: true
+	odd: false
 	buzz: false
 	duck: false
 ?[1;31m
 Start test 28?[0m
 Enter a natural number:
-> 20677
-Properties of 20677
-	even: false
-	odd: true
-	buzz: true
+> 10298
+Properties of 10298
+	even: true
+	odd: false
+	buzz: false
 	duck: true
 ?[1;31m
 Start test 29?[0m
 Enter a natural number:
-> 32494
-Properties of 32494
-	even: true
-	odd: false
-	buzz: true
-	duck: false
-?[1;31m
-Start test 30?[0m
-Enter a natural number:
-> 1171
-Properties of 1171
-	even: false
-	odd: true
-	buzz: false
-	duck: false
-?[1;31m
-Start test 31?[0m
-Enter a natural number:
-> 30544
-Properties of 30544
+> 5280
+Properties of 5280
 	even: true
 	odd: false
 	buzz: false
 	duck: true
 ?[1;31m
-Start test 32?[0m
+Start test 30?[0m
 Enter a natural number:
-> 12022
-Properties of 12022
+> 10789
+Properties of 10789
+	even: false
+	odd: true
+	buzz: false
+	duck: true
+?[1;31m
+Start test 31?[0m
+Enter a natural number:
+> 7144
+Properties of 7144
 	even: true
 	odd: false
+	buzz: false
+	duck: false
+?[1;31m
+Start test 32?[0m
+Enter a natural number:
+> 10285
+Properties of 10285
+	even: false
+	odd: true
 	buzz: false
 	duck: true
 ?[1;31m
 Start test 33?[0m
 Enter a natural number:
-> 5547
-Properties of 5547
-	even: false
-	odd: true
-	buzz: true
+> 5218
+Properties of 5218
+	even: true
+	odd: false
+	buzz: false
 	duck: false
 ?[1;31m
 Start test 34?[0m
 Enter a natural number:
-> 20837
-Properties of 20837
-	even: false
-	odd: true
-	buzz: true
-	duck: true
-?[1;31m
-Start test 35?[0m
-Enter a natural number:
-> 22082
-Properties of 22082
+> 19546
+Properties of 19546
 	even: true
 	odd: false
 	buzz: false
+	duck: false
+?[1;31m
+Start test 35?[0m
+Enter a natural number:
+> 23590
+Properties of 23590
+	even: true
+	odd: false
+	buzz: true
 	duck: true
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
