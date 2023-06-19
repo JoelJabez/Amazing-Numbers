@@ -4,6 +4,13 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class AmazingNumbers {
+	private static long number;
+	private static boolean isEven;
+	private static boolean isOdd;
+	private static boolean isBuzzNumber;
+	private static boolean isDuckNumber;
+	private static boolean isPalindromicNumber;
+
 	public static void start() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -16,11 +23,11 @@ public class AmazingNumbers {
 		boolean isDone = false;
 		while (!isDone) {
 			System.out.println("\nEnter a request:");
-			long number;
 			try {
 				number = Long.parseLong(scanner.nextLine());
 				if (number >= 1) {
-					printProperties(number);
+					callProperties();
+					printProperties();
 				} else if (number == 0) {
 					isDone = true;
 				} else {
@@ -33,36 +40,46 @@ public class AmazingNumbers {
 		System.out.println("\nGoodbye!");
 	}
 
-	private static void printProperties(long number) {
-		System.out.printf("Properties of %,d\n", number);
 
-		System.out.println("\t   even: " + isEven(number));
-		System.out.println("\t    odd: " + !isEven(number));
-		System.out.println("\t   buzz: " + buzzNumbers(number));
-		System.out.println("\t   duck: " + duckNumbers(number));
-		System.out.println("palindromic: " + palindromicNumbers(number));
+	private static void callProperties() {
+		isEven = isEven();
+		isOdd = isOdd();
+		isBuzzNumber = isBuzzNumber();
+		isDuckNumber = isDuckNumber();
+		isPalindromicNumber = isPalindromicNumber();
 	}
 
-	private static boolean isEven(long number) {
+	private static void printProperties() {
+		System.out.printf("Properties of %,d\n", number);
+
+		System.out.println("\t   even: " + isEven);
+		System.out.println("\t    odd: " + isOdd);
+		System.out.println("\t   buzz: " + isBuzzNumber);
+		System.out.println("\t   duck: " + isDuckNumber);
+		System.out.println("palindromic: " + isPalindromicNumber);
+	}
+
+	private static boolean isEven() {
 		return number % 2 == 0;
 	}
 
-	private static boolean buzzNumbers(long number) {
-		String stringNumber = Long.toString(number);
-		int length = stringNumber.length();
-		char lastNumber = stringNumber.charAt(length - 1);
-
-		if (number % 7 == 0) {
-			return true;
-		} else return lastNumber == '7';
+	private static boolean isOdd() {
+		return number % 2 == 1;
 	}
 
-	private static boolean duckNumbers(long number) {
+	private static boolean isBuzzNumber() {
+		if (number % 7 == 0 || number % 10 == 7) {
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean isDuckNumber() {
 		String stringNumber = String.valueOf(number);
 		return stringNumber.contains("0");
 	}
 
-	private static boolean palindromicNumbers(long number) {
+	private static boolean isPalindromicNumber() {
 		String normal = String.valueOf(number);
 		StringBuilder reverse = new StringBuilder(normal).reverse();
 
