@@ -1,7 +1,10 @@
 import org.hyperskill.hstest.dynamic.DynamicTest;
 import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
-import util.*;
+import util.Checker;
+import util.LinesChecker;
+import util.RegexChecker;
+import util.UserProgram;
 
 import java.util.Random;
 import java.util.stream.LongStream;
@@ -17,8 +20,14 @@ public final class NumbersTest extends StageTest {
     );
     private static final Checker ERROR_MESSAGE = new RegexChecker(
             "is( not|n't) natural",
-            "Number {0} is not natural. Expected message: \"... is not natural\""
+            "Number {0} is not natural. The program should print an error message."
     );
+    private static final Checker PROPERTIES_OF = new RegexChecker(
+            "properties of \\d",
+            "The first line of number''s properties should contains \"Properties of {0}\"."
+    );
+    private static final Checker PROFILE_LINES = new LinesChecker(NumberProperty.values().length + 1);
+
     private static final Checker FINISHED = new Checker(UserProgram::isFinished,
             "The program should finish."
     );
@@ -38,36 +47,23 @@ public final class NumbersTest extends StageTest {
                 .result();
     }
 
-    @DynamicTest(data = "notNaturalNumbers", order = 5)
-    CheckResult notNaturalNumbersTest(final long number) {
-        return new UserProgram()
-                .start()
-                .check(ASK_FOR_NUMBER)
-                .execute(number)
-                .check(ERROR_MESSAGE)
-                .check(FINISHED)
-                .result();
-    }
 
-    private long[] numbers() {
+    private long[] getNumbers() {
         return LongStream.concat(
                 LongStream.range(1, FIRST_NUMBERS),
                 random.longs(RANDOM_TESTS, 1, Short.MAX_VALUE)
         ).toArray();
     }
 
-    @DynamicTest(data = "numbers", order = 10)
-    CheckResult buzzTest(long number) {
+    @DynamicTest(data = "getNumbers", order = 20)
+    CheckResult naturalNumbersTest(long number) {
         return new UserProgram()
                 .start()
                 .check(ASK_FOR_NUMBER)
                 .execute(number)
-//                .check(new LinesChecker(4))
-                .check(new RegexChecker("number is (even|odd)",
-                        "The program should calculate and print the parity of the given number."))
-                .check(new TextChecker(number % 2 == 0 ? "even" : "odd",
-                        "Number''s parity is incorrect. Number {0} should be {2}."))
-                .check(new BuzzChecker(number))
+                .check(PROPERTIES_OF)
+                .check(PROFILE_LINES)
+                .check(new PropertiesChecker(number))
                 .check(FINISHED)
                 .result();
     }
