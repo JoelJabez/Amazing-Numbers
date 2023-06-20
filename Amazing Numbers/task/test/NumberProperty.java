@@ -14,6 +14,7 @@ public enum NumberProperty implements LongPredicate {
     }),
     GAPFUL(number -> number >= 100 &&
             number % (getNumericValue(String.valueOf(number).charAt(0)) * 10L + number % 10) == 0),
+    SPY(x -> digits(x).sum() == digits(x).reduce(1L, (a, b) -> a * b)),
     EVEN(x -> x % 2 == 0),
     ODD(x -> x % 2 != 0);
 
