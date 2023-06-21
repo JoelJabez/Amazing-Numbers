@@ -1,0 +1,14 @@
+type: code
+files:
+- name: src/Main.java
+  visible: true
+  highlight_level: NONE
+  text: // declare your enum here
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11519#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 21 Jun 2023 06:38:49 UTC"
+record: -1
+submission_language: java17

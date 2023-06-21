@@ -49,13 +49,7 @@ public class AmazingNumbers {
 						}
 					}
 
-					case 3 -> {
-						if (propertyChecker(propertyList, filters)) {
-							printProperties(filters, times);
-						}
-					}
-
-					case 4 -> {
+					default -> {
 						if (propertyChecker(propertyList, filters) && checkExclusivity(filters)) {
 							printProperties(filters, times);
 						}
@@ -76,6 +70,8 @@ public class AmazingNumbers {
 		ArrayList<String> filters = new ArrayList<>();
 
 		switch (length) {
+			case 7: filters.add(0, text.split(" ")[6].toLowerCase());
+			case 6: filters.add(0, text.split(" ")[5].toLowerCase());
 			case 5: filters.add(0, text.split(" ")[4].toLowerCase());
 			case 4: filters.add(0, text.split(" ")[3].toLowerCase());
 			case 3: filters.add(0, text.split(" ")[2].toLowerCase());
@@ -86,7 +82,7 @@ public class AmazingNumbers {
 
 	private static void addToPropertyList() {
 		String[] properties = {"\t   buzz", "\t   duck", "palindromic", "\t gapful", "\t\tspy",
-				"\t square", "\t  sunny", "\t   even", "\t    odd"};
+				"\t square", "\t  sunny", "\tjumping", "\t   even", "\t    odd"};
 		for (String property: properties) {
 			propertyList.add(property);
 		}

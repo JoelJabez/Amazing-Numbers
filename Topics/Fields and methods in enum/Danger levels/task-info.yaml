@@ -1,0 +1,19 @@
+type: code
+files:
+- name: src/Main.java
+  visible: true
+  highlight_level: NONE
+  text: |-
+    enum DangerLevel {
+        HIGH,
+        MEDIUM,
+        LOW;
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11529#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 21 Jun 2023 08:39:11 UTC"
+record: -1
+submission_language: java17

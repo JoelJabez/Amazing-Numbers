@@ -49,24 +49,27 @@ public class CheckProperty {
 	}
 
 	static Boolean checkExclusivity(ArrayList<String> filtersTemp) {
-		ArrayList<String> filters = new ArrayList<>();
-		for (String s : filtersTemp) {
-			filters.add(s.strip());
-		}
+		if (filtersTemp.size() != 1) {
+			ArrayList<String> filters = new ArrayList<>();
+			for (String s : filtersTemp) {
+				filters.add(s.strip());
+			}
 
-		StringBuilder errorMessage = new StringBuilder("The request contains mutually exclusive properties: ");
-		if (filters.contains("odd") && filters.contains("even")) {
-			errorMessage.append("[ODD, EVEN]");
-		} else if (filters.contains("duck") && filters.contains("spy")) {
-			errorMessage.append("[DUCK, SPY]");
-		} else if (filters.contains("sunny") && filters.contains("square")) {
-			errorMessage.append("[SUNNY, SQUARE]");
-		}
+			StringBuilder errorMessage = new StringBuilder("The request contains mutually exclusive properties: ");
+			if (filters.contains("odd") && filters.contains("even")) {
+				errorMessage.append("[ODD, EVEN]");
+			} else if (filters.contains("duck") && filters.contains("spy")) {
+				errorMessage.append("[DUCK, SPY]");
+			} else if (filters.contains("sunny") && filters.contains("square")) {
+				errorMessage.append("[SUNNY, SQUARE]");
+			}
 
-		if (errorMessage.length() != 52) {
-			System.out.println(errorMessage);
-			System.out.println("There are no numbers with these properties.");
-			return false;
+			if (errorMessage.length() != 52) {
+				System.out.println(errorMessage);
+				System.out.println("There are no numbers with these properties.");
+				return false;
+			}
+			return true;
 		}
 		return true;
 	}
@@ -82,10 +85,33 @@ public class CheckProperty {
 		propertyCondition.add(isSpyNumber());
 		propertyCondition.add(isSquare(number));
 		propertyCondition.add(isSunny());
+		propertyCondition.add(isJumpingNumber());
 		propertyCondition.add(isEven());
 		propertyCondition.add(isOdd());
 
 		return propertyCondition;
+	}
+
+	private static Boolean isJumpingNumber() {
+		int size = (int) Math.log10(number);
+
+		if (size != 0) {
+			ArrayList<Integer> numbers = new ArrayList<>();
+			long tempNumber = number;
+
+			while (tempNumber != 0) {
+				numbers.add(0, (int) (tempNumber % 10));
+				tempNumber = tempNumber / 10;
+			}
+
+			for (int i = 0; i < numbers.size() - 1; i++) {
+				if (Math.abs(numbers.get(i) - numbers.get(i + 1)) != 1) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return true;
 	}
 
 	private static boolean isEven() {
