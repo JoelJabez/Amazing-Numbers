@@ -993,6 +993,15 @@ files:
     for (Integer splitNumber : splitNumbers) {\n\t\t\tsum += splitNumber;\n\t\t\t\
     product *= splitNumber;\n\t\t}\n\n\t\treturn sum == product;\n\t}\n}\n"
   learner_created: true
+- name: src/numbers/CheckProperty.java
+  visible: true
+  learner_created: true
+- name: src/numbers/Printing.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13203#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 21 Jun 2023 03:41:55 UTC"
 record: 6
