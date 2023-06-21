@@ -69,14 +69,9 @@ public class AmazingNumbers {
 	private static ArrayList<String> addFilters(String text, int length) {
 		ArrayList<String> filters = new ArrayList<>();
 
-		switch (length) {
-			case 7: filters.add(0, text.split(" ")[6].toLowerCase());
-			case 6: filters.add(0, text.split(" ")[5].toLowerCase());
-			case 5: filters.add(0, text.split(" ")[4].toLowerCase());
-			case 4: filters.add(0, text.split(" ")[3].toLowerCase());
-			case 3: filters.add(0, text.split(" ")[2].toLowerCase());
+		for (int i = length; i > 2; i--) {
+			filters.add(0, text.split(" ")[i - 1].toLowerCase());
 		}
-
 		return filters;
 	}
 
