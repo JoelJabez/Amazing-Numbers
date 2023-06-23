@@ -3,18 +3,13 @@ package numbers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static numbers.CheckProperty.callProperties;
+import static numbers.AmazingNumbers.assignProperties;
 
 public class Printing {
-	private static ArrayList<String> propertyList;
 	private static long number;
 
 	static void setNumber(long number) {
 		Printing.number = number;
-	}
-
-	static void setPropertyList(ArrayList<String> propertyList) {
-		Printing.propertyList = propertyList;
 	}
 
 	static void printRequests() {
@@ -23,41 +18,36 @@ public class Printing {
 		System.out.println("- enter two natural numbers to obtain the properties of the list:");
 		System.out.println("  * the first parameter represents a starting number;");
 		System.out.println("  * the second parameter shows how many consecutive numbers are to be processed;");
-		System.out.println("- two natural numbers and a property to search for;");
-		System.out.println("- two natural numbers and two properties to search for;");
+		System.out.println("- two natural numbers and properties to search for;");
+		System.out.println("- a property preceded by minus must not be present in numbers;");
 		System.out.println("- separate the parameters with one space;");
 		System.out.println("- enter 0 to exit.");
 	}
 
-	private static HashMap<String, Boolean> assignProperties() {
-		ArrayList<Boolean> propertyCondition = callProperties(number);
-
-		HashMap<String, Boolean> properties = new HashMap<>();
-		for (int i = 0; i < propertyCondition.size(); i++) {
-			properties.put(propertyList.get(i).strip(), propertyCondition.get(i));
-		}
-
-		return properties;
-	}
-
 	static void printProperties(ArrayList<String> filters, int count) {
 
-		while(count != 0) {
-			HashMap<String, Boolean> properties = assignProperties();
+		while (count != 0) {
+			HashMap<String, Boolean> properties = assignProperties(number);
 			ArrayList<Boolean> condition = new ArrayList<>();
-			for (String filter: filters) {
-				condition.add(properties.get(filter));
+			for (String filter : filters) {
+				for (Properties property : Properties.values()) {
+					if (filter.contains(property.getNotPresent())) {
+						condition.add(!properties.get(property.getName()));
+					} else if (filter.contains(property.getName())) {
+						condition.add(properties.get(filter));
+					}
+				}
 			}
+
 			if (!condition.contains(false)) {
 				System.out.printf("%d is ", number);
 				int counter = 0;
-				for (String s: propertyList) {
-					s = s.strip();
-					if (properties.get(s)) {
+				for (Properties property : Properties.values()) {
+					if (properties.get(property.getName())) {
 						if (counter == 0) {
-							System.out.print(s);
+							System.out.print(property.getName());
 						} else {
-							System.out.printf(", %s", s);
+							System.out.printf(", %s", property.getName());
 						}
 						counter++;
 					}
@@ -77,15 +67,14 @@ public class Printing {
 		for (long i = number; i < max; i++) {
 			System.out.printf("%d is ", i);
 			number = i;
-			HashMap<String, Boolean> properties = assignProperties();
+			HashMap<String, Boolean> properties = assignProperties(number);
 			int counter = 0;
-			for (String s: propertyList) {
-				s = s.strip();
-				if (properties.get(s)) {
+			for (Properties property: Properties.values()) {
+				if (properties.get(property.getName())) {
 					if (counter == 0) {
-						System.out.print(s);
+						System.out.print(property.getName());
 					} else {
-						System.out.printf(", %s", s);
+						System.out.printf(", %s", property.getName());
 					}
 					counter++;
 				}
@@ -97,8 +86,9 @@ public class Printing {
 	static void printProperties(ArrayList<Boolean> propertyConditions) {
 		System.out.printf("Properties of %,d\n", number);
 
-		for (int i = 0; i < propertyConditions.size(); i++) {
-			System.out.printf("%s: %b\n", propertyList.get(i), propertyConditions.get(i));
+		for (Properties properties: Properties.values()) {
+			System.out.printf("%s%s: %b\n", properties.getFormat(), properties.getName(),
+					propertyConditions.get(properties.getIndex()));
 		}
 	}
 }

@@ -6,14 +6,12 @@ import static numbers.CheckProperty.*;
 import static numbers.Printing.*;
 
 public class AmazingNumbers {
-	private static ArrayList<String> propertyList = new ArrayList<>();
-
-	public static void start() {
+	public static void begin() {
 		Scanner scanner = new Scanner(System.in);
 
-		addToPropertyList();
 		System.out.println("Welcome to Amazing Numbers!\n");
 		printRequests();
+
 		boolean isDone = false;
 		while (!isDone) {
 			System.out.println("\nEnter a request:");
@@ -21,16 +19,18 @@ public class AmazingNumbers {
 			try {
 				text = scanner.nextLine();
 				String[] arguments = text.split(" ");
-				final long number = Long.parseLong(text.split(" ")[0]);
-				setNumber(number);
-				int length = arguments.length;
-				int times = 0;
 
-				if (length > 1) {
-					times = Integer.parseInt(text.split(" ")[1]);
+				final long number = Long.parseLong(text.split(" ")[0]);
+				int argumentLength = arguments.length;
+				int repeatNumberOfTimes = 0;
+				setNumber(number);
+
+				if (argumentLength > 1) {
+					repeatNumberOfTimes = Integer.parseInt(text.split(" ")[1]);
 				}
-				ArrayList<String> filters = addFilters(text, length);
-				switch (length) {
+
+				ArrayList<String> filters = addFilters(text, argumentLength);
+				switch (argumentLength) {
 					case 1 -> {
 						if (number >= 1) {
 							printProperties(callProperties(number));
@@ -42,16 +42,16 @@ public class AmazingNumbers {
 					}
 
 					case 2 -> {
-						if (times >= 1) {
-							printProperties(times);
+						if (repeatNumberOfTimes >= 1) {
+							printProperties(repeatNumberOfTimes);
 						} else {
 							System.out.println("The second parameter should be a natural number");
 						}
 					}
 
 					default -> {
-						if (propertyChecker(propertyList, filters) && checkExclusivity(filters)) {
-							printProperties(filters, times);
+						if (propertyChecker(filters) && checkExclusivity(filters)) {
+							printProperties(filters, repeatNumberOfTimes);
 						}
 					}
 				}
@@ -75,14 +75,14 @@ public class AmazingNumbers {
 		return filters;
 	}
 
-	private static void addToPropertyList() {
-		String[] properties = {"\t   buzz", "\t   duck", "palindromic", "\t gapful", "\t\tspy",
-				"\t square", "\t  sunny", "\tjumping", "\t   even", "\t    odd"};
-		for (String property: properties) {
-			propertyList.add(property);
+	static HashMap<String, Boolean> assignProperties(long number) {
+		ArrayList<Boolean> propertyCondition = callProperties(number);
+		HashMap<String, Boolean> properties = new HashMap<>();
+
+		for (Properties property: Properties.values()) {
+			properties.put(property.getName(), propertyCondition.get(property.getIndex()));
 		}
 
-		setPropertyList(propertyList);
+		return properties;
 	}
-
 }

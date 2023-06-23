@@ -927,6 +927,162 @@ files:
         enum Parameter {ONE, TWO, THREE}
     }
   learner_created: false
+- name: src/numbers/CheckProperty.java
+  visible: true
+  text: "package numbers;\n\nimport java.util.ArrayList;\nimport java.util.Objects;\n\
+    \npublic class CheckProperty {\n\tprivate static long number;\n\n\tstatic Boolean\
+    \ propertyChecker(ArrayList<String> propertyList, ArrayList<String> property)\
+    \ {\n\t\tArrayList<String> invalid = new ArrayList<>();\n\t\tfor (String value:\
+    \ property) {\n\t\t\tint count = 0;\n\t\t\tfor (String s: propertyList) {\n\t\t\
+    \t\tif (value.equals(s.strip())) {\n\t\t\t\t\tcount++;\n\t\t\t\t\tbreak;\n\t\t\
+    \t\t}\n\t\t\t}\n\n\t\t\tif (count == 0) {\n\t\t\t\tinvalid.add(value);\n\t\t\t\
+    }\n\t\t}\n\n\t\tif (invalid.size() == 1) {\n\t\t\tSystem.out.printf(\"The property\
+    \ [%S] is wrong.\\n\", invalid.get(0));\n\n\t\t} else if (invalid.size() > 1)\
+    \ {\n\t\t\tSystem.out.print(\"The properties [\");\n\t\t\tfor (int i = 0; i <\
+    \ invalid.size(); i++) {\n\t\t\t\tif (i != 0) {\n\t\t\t\t\tSystem.out.print(\"\
+    , \");\n\t\t\t\t}\n\t\t\t\tSystem.out.printf(\"%S\", invalid.get(i));\n\t\t\t\
+    }\n\t\t\tSystem.out.println(\"] are wrong.\");\n\t\t} else {\n\t\t\treturn true;\n\
+    \t\t}\n\t\tSystem.out.print(\"Available properties: [\");\n\t\tfor (int i = 0;\
+    \ i < propertyList.size(); i++) {\n\t\t\tSystem.out.printf(\"%S\", propertyList.get(i).strip());\n\
+    \t\t\tif (i != propertyList.size() - 1) {\n\t\t\t\tSystem.out.print(\", \");\n\
+    \t\t\t}\n\t\t}\n\t\tSystem.out.println(\"]\");\n\t\treturn false;\n\t}\n\n\tstatic\
+    \ Boolean checkExclusivity(ArrayList<String> filtersTemp) {\n\t\tif (filtersTemp.size()\
+    \ != 1) {\n\t\t\tArrayList<String> filters = new ArrayList<>();\n\t\t\tfor (String\
+    \ s : filtersTemp) {\n\t\t\t\tfilters.add(s.strip());\n\t\t\t}\n\n\t\t\tStringBuilder\
+    \ errorMessage = new StringBuilder(\"The request contains mutually exclusive properties:\
+    \ \");\n\t\t\tif (filters.contains(\"odd\") && filters.contains(\"even\")) {\n\
+    \t\t\t\terrorMessage.append(\"[ODD, EVEN]\");\n\t\t\t} else if (filters.contains(\"\
+    duck\") && filters.contains(\"spy\")) {\n\t\t\t\terrorMessage.append(\"[DUCK,\
+    \ SPY]\");\n\t\t\t} else if (filters.contains(\"sunny\") && filters.contains(\"\
+    square\")) {\n\t\t\t\terrorMessage.append(\"[SUNNY, SQUARE]\");\n\t\t\t}\n\n\t\
+    \t\tif (errorMessage.length() != 52) {\n\t\t\t\tSystem.out.println(errorMessage);\n\
+    \t\t\t\tSystem.out.println(\"There are no numbers with these properties.\");\n\
+    \t\t\t\treturn false;\n\t\t\t}\n\t\t\treturn true;\n\t\t}\n\t\treturn true;\n\t\
+    }\n\n\tstatic ArrayList<Boolean> callProperties(long number) {\n\t\tCheckProperty.number\
+    \ = number;\n\t\tArrayList<Boolean> propertyCondition = new ArrayList<>();\n\n\
+    \t\tpropertyCondition.add(isBuzzNumber());\n\t\tpropertyCondition.add(isDuckNumber());\n\
+    \t\tpropertyCondition.add(isPalindromicNumber());\n\t\tpropertyCondition.add(isGapfulNumber());\n\
+    \t\tpropertyCondition.add(isSpyNumber());\n\t\tpropertyCondition.add(isSquare(number));\n\
+    \t\tpropertyCondition.add(isSunny());\n\t\tpropertyCondition.add(isJumpingNumber());\n\
+    \t\tpropertyCondition.add(isEven());\n\t\tpropertyCondition.add(isOdd());\n\n\t\
+    \treturn propertyCondition;\n\t}\n\n\tprivate static Boolean isJumpingNumber()\
+    \ {\n\t\tint size = (int) Math.log10(number);\n\n\t\tif (size != 0) {\n\t\t\t\
+    ArrayList<Integer> numbers = new ArrayList<>();\n\t\t\tlong tempNumber = number;\n\
+    \n\t\t\twhile (tempNumber != 0) {\n\t\t\t\tnumbers.add(0, (int) (tempNumber %\
+    \ 10));\n\t\t\t\ttempNumber = tempNumber / 10;\n\t\t\t}\n\n\t\t\tfor (int i =\
+    \ 0; i < numbers.size() - 1; i++) {\n\t\t\t\tif (Math.abs(numbers.get(i) - numbers.get(i\
+    \ + 1)) != 1) {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn true;\n\
+    \t\t}\n\t\treturn true;\n\t}\n\n\tprivate static boolean isEven() {\n\t\treturn\
+    \ number % 2 == 0;\n\t}\n\n\tprivate static boolean isOdd() {\n\t\treturn number\
+    \ % 2 == 1;\n\t}\n\n\tprivate static boolean isBuzzNumber() {\n\t\tif (number\
+    \ % 7 == 0 || number % 10 == 7) {\n\t\t\treturn true;\n\t\t}\n\t\treturn false;\n\
+    \t}\n\n\tprivate static boolean isDuckNumber() {\n\t\treturn String.valueOf(number).contains(\"\
+    0\");\n\t}\n\n\tprivate static boolean isPalindromicNumber() {\n\t\tString normal\
+    \ = String.valueOf(number);\n\t\tStringBuilder reverse = new StringBuilder(normal).reverse();\n\
+    \n\t\tfor (int i = 0; i < normal.length(); i++) {\n\t\t\tif (!Objects.equals(normal.charAt(i),\
+    \ reverse.charAt(i))) {\n\t\t\t\treturn false;\n\t\t\t}\n\t\t}\n\t\treturn true;\n\
+    \t}\n\n\tprivate static boolean isGapfulNumber() {\n\t\tint size = (int) Math.log10(number);\n\
+    \n\t\tif (size > 1) {\n\t\t\tint firstNumber = (int) (number / Math.pow(10, size));\n\
+    \t\t\tint lastNumber = (int) (number % 10);\n\n\t\t\tint sum = (firstNumber *\
+    \ 10) + lastNumber;\n\n\t\t\treturn number % sum == 0;\n\t\t}\n\n\t\treturn false;\n\
+    \t}\n\n\tprivate static boolean isSpyNumber() {\n\t\tArrayList<Integer> splitNumbers\
+    \ = new ArrayList<>();\n\t\tlong tempNumber = number;\n\n\t\twhile (tempNumber\
+    \ != 0) {\n\t\t\tsplitNumbers.add(0, (int) (tempNumber % 10));\n\t\t\ttempNumber\
+    \ = tempNumber / 10;\n\t\t}\n\n\t\tlong sum = 0;\n\t\tlong product = 1;\n\t\t\
+    for (Integer splitNumber : splitNumbers) {\n\t\t\tsum += splitNumber;\n\t\t\t\
+    product *= splitNumber;\n\t\t}\n\n\t\treturn sum == product;\n\t}\n\n\tprivate\
+    \ static boolean isSquare(long number) {\n\t\tdouble squareDouble = Math.sqrt(number);\n\
+    \t\tint squareInt = (int) squareDouble;\n\n\t\treturn squareInt == squareDouble;\n\
+    \t}\n\n\tprivate static boolean isSunny() {\n\t\treturn isSquare(number + 1);\n\
+    \t}\n}\n"
+  learner_created: true
+- name: src/numbers/Printing.java
+  visible: true
+  text: "package numbers;\n\nimport java.util.ArrayList;\nimport java.util.HashMap;\n\
+    \nimport static numbers.CheckProperty.callProperties;\n\npublic class Printing\
+    \ {\n\tprivate static ArrayList<String> propertyList;\n\tprivate static long number;\n\
+    \n\tstatic void setNumber(long number) {\n\t\tPrinting.number = number;\n\t}\n\
+    \n\tstatic void setPropertyList(ArrayList<String> propertyList) {\n\t\tPrinting.propertyList\
+    \ = propertyList;\n\t}\n\n\tstatic void printRequests() {\n\t\tSystem.out.println(\"\
+    Supported requests:\");\n\t\tSystem.out.println(\"- enter a natural number to\
+    \ know its properties;\");\n\t\tSystem.out.println(\"- enter two natural numbers\
+    \ to obtain the properties of the list:\");\n\t\tSystem.out.println(\"  * the\
+    \ first parameter represents a starting number;\");\n\t\tSystem.out.println(\"\
+    \  * the second parameter shows how many consecutive numbers are to be processed;\"\
+    );\n\t\tSystem.out.println(\"- two natural numbers and a property to search for;\"\
+    );\n\t\tSystem.out.println(\"- two natural numbers and two properties to search\
+    \ for;\");\n\t\tSystem.out.println(\"- separate the parameters with one space;\"\
+    );\n\t\tSystem.out.println(\"- enter 0 to exit.\");\n\t}\n\n\tprivate static HashMap<String,\
+    \ Boolean> assignProperties() {\n\t\tArrayList<Boolean> propertyCondition = callProperties(number);\n\
+    \n\t\tHashMap<String, Boolean> properties = new HashMap<>();\n\t\tfor (int i =\
+    \ 0; i < propertyCondition.size(); i++) {\n\t\t\tproperties.put(propertyList.get(i).strip(),\
+    \ propertyCondition.get(i));\n\t\t}\n\n\t\treturn properties;\n\t}\n\n\tstatic\
+    \ void printProperties(ArrayList<String> filters, int count) {\n\n\t\twhile(count\
+    \ != 0) {\n\t\t\tHashMap<String, Boolean> properties = assignProperties();\n\t\
+    \t\tArrayList<Boolean> condition = new ArrayList<>();\n\t\t\tfor (String filter:\
+    \ filters) {\n\t\t\t\tcondition.add(properties.get(filter));\n\t\t\t}\n\t\t\t\
+    if (!condition.contains(false)) {\n\t\t\t\tSystem.out.printf(\"%d is \", number);\n\
+    \t\t\t\tint counter = 0;\n\t\t\t\tfor (String s: propertyList) {\n\t\t\t\t\ts\
+    \ = s.strip();\n\t\t\t\t\tif (properties.get(s)) {\n\t\t\t\t\t\tif (counter ==\
+    \ 0) {\n\t\t\t\t\t\t\tSystem.out.print(s);\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\
+    \tSystem.out.printf(\", %s\", s);\n\t\t\t\t\t\t}\n\t\t\t\t\t\tcounter++;\n\t\t\
+    \t\t\t}\n\t\t\t\t}\n\t\t\t\tSystem.out.println();\n\n\t\t\t\tcount--;\n\t\t\t\
+    }\n\t\t\tnumber++;\n\t\t}\n\t}\n\n\tstatic void printProperties(int times) {\n\
+    \t\tSystem.out.println();\n\n\t\tlong max = number + times;\n\t\tfor (long i =\
+    \ number; i < max; i++) {\n\t\t\tSystem.out.printf(\"%d is \", i);\n\t\t\tnumber\
+    \ = i;\n\t\t\tHashMap<String, Boolean> properties = assignProperties();\n\t\t\t\
+    int counter = 0;\n\t\t\tfor (String s: propertyList) {\n\t\t\t\ts = s.strip();\n\
+    \t\t\t\tif (properties.get(s)) {\n\t\t\t\t\tif (counter == 0) {\n\t\t\t\t\t\t\
+    System.out.print(s);\n\t\t\t\t\t} else {\n\t\t\t\t\t\tSystem.out.printf(\", %s\"\
+    , s);\n\t\t\t\t\t}\n\t\t\t\t\tcounter++;\n\t\t\t\t}\n\t\t\t}\n\t\t\tSystem.out.println();\n\
+    \t\t}\n\t}\n\n\tstatic void printProperties(ArrayList<Boolean> propertyConditions)\
+    \ {\n\t\tSystem.out.printf(\"Properties of %,d\\n\", number);\n\n\t\tfor (int\
+    \ i = 0; i < propertyConditions.size(); i++) {\n\t\t\tSystem.out.printf(\"%s:\
+    \ %b\\n\", propertyList.get(i), propertyConditions.get(i));\n\t\t}\n\t}\n}\n"
+  learner_created: true
+- name: src/numbers/AmazingNumbers.java
+  visible: true
+  text: "package numbers;\n\nimport java.util.*;\n\nimport static numbers.CheckProperty.*;\n\
+    import static numbers.Printing.*;\n\npublic class AmazingNumbers {\n\tprivate\
+    \ static ArrayList<String> propertyList = new ArrayList<>();\n\n\tpublic static\
+    \ void start() {\n\t\tScanner scanner = new Scanner(System.in);\n\n\t\taddToPropertyList();\n\
+    \t\tSystem.out.println(\"Welcome to Amazing Numbers!\\n\");\n\t\tprintRequests();\n\
+    \t\tboolean isDone = false;\n\t\twhile (!isDone) {\n\t\t\tSystem.out.println(\"\
+    \\nEnter a request:\");\n\t\t\tString text = \"\";\n\t\t\ttry {\n\t\t\t\ttext\
+    \ = scanner.nextLine();\n\t\t\t\tString[] arguments = text.split(\" \");\n\t\t\
+    \t\tfinal long number = Long.parseLong(text.split(\" \")[0]);\n\t\t\t\tsetNumber(number);\n\
+    \t\t\t\tint length = arguments.length;\n\t\t\t\tint times = 0;\n\n\t\t\t\tif (length\
+    \ > 1) {\n\t\t\t\t\ttimes = Integer.parseInt(text.split(\" \")[1]);\n\t\t\t\t\
+    }\n\t\t\t\tArrayList<String> filters = addFilters(text, length);\n\t\t\t\tswitch\
+    \ (length) {\n\t\t\t\t\tcase 1 -> {\n\t\t\t\t\t\tif (number >= 1) {\n\t\t\t\t\t\
+    \t\tprintProperties(callProperties(number));\n\t\t\t\t\t\t} else if (number ==\
+    \ 0) {\n\t\t\t\t\t\t\tisDone = true;\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\tSystem.out.println(\"\
+    The first parameter should be a natural number or zero.\");\n\t\t\t\t\t\t}\n\t\
+    \t\t\t\t}\n\n\t\t\t\t\tcase 2 -> {\n\t\t\t\t\t\tif (times >= 1) {\n\t\t\t\t\t\t\
+    \tprintProperties(times);\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\tSystem.out.println(\"\
+    The second parameter should be a natural number\");\n\t\t\t\t\t\t}\n\t\t\t\t\t\
+    }\n\n\t\t\t\t\tdefault -> {\n\t\t\t\t\t\tif (propertyChecker(propertyList, filters)\
+    \ && checkExclusivity(filters)) {\n\t\t\t\t\t\t\tprintProperties(filters, times);\n\
+    \t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t} catch (NumberFormatException nfe)\
+    \ {\n\t\t\t\tif (text.equals(\"\")) {\n\t\t\t\t\tprintRequests();\n\t\t\t\t} else\
+    \ {\n\t\t\t\t\tSystem.out.println(\"Invalid input\");\n\t\t\t\t}\n\t\t\t}\n\t\t\
+    }\n\t\tSystem.out.println(\"\\nGoodbye!\");\n\t}\n\n\tprivate static ArrayList<String>\
+    \ addFilters(String text, int length) {\n\t\tArrayList<String> filters = new ArrayList<>();\n\
+    \n\t\tfor (int i = length; i > 2; i--) {\n\t\t\tfilters.add(0, text.split(\" \"\
+    )[i - 1].toLowerCase());\n\t\t}\n\t\treturn filters;\n\t}\n\n\tprivate static\
+    \ void addToPropertyList() {\n\t\tString[] properties = {\"\\t   buzz\", \"\\\
+    t   duck\", \"palindromic\", \"\\t gapful\", \"\\t\\tspy\",\n\t\t\t\t\"\\t square\"\
+    , \"\\t  sunny\", \"\\tjumping\", \"\\t   even\", \"\\t    odd\"};\n\t\tfor (String\
+    \ property: properties) {\n\t\t\tpropertyList.add(property);\n\t\t}\n\n\t\tsetPropertyList(propertyList);\n\
+    \t}\n\n}\n"
+  learner_created: true
+- name: src/numbers/Properties.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13205#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Fri, 23 Jun 2023 02:30:41 UTC"
 record: -1
